@@ -1,0 +1,14 @@
+# URL allowlist for the Copilot CLI preToolUse hook.
+# One domain per line. Lines starting with '#' and blank lines are ignored.
+# A request to host H is allowed if H equals an entry, or H ends with
+# ".<entry>" (i.e. the entry matches on a dot boundary, so "github.com"
+# allows "api.github.com" but not "evilgithub.com").
+
+github.com
+docs.github.com
+api.github.com
+raw.githubusercontent.com
+objects.githubusercontent.com
+pkg.go.dev
+registry.npmjs.org
+pypi.org
