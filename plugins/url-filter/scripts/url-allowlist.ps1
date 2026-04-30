@@ -88,7 +88,7 @@ foreach ($u in $urls) {
     $h = Get-UrlHost $u
     if (-not $h -or -not (Test-HostAllowed $h)) {
         $shown = if ($h) { $h } else { '<unparseable>' }
-        $reason = "URL host '$shown' is not on the approved allowlist (.github/hooks/allowed-domains.txt). Do not try to access this URL host."
+        $reason = "URL host '$shown' is not on the approved allowlist (.github/hooks/allowed-domains.txt). Do not try to access this URL host. **DO NOT** attempt to work around this restriction with other tools."
         $obj = [pscustomobject]@{
             permissionDecision       = 'deny'
             permissionDecisionReason = $reason

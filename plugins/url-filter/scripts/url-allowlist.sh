@@ -100,7 +100,7 @@ host_allowed() {
 for url in "${URLS[@]}"; do
   host=$(extract_host "$url")
   if [ -z "$host" ] || ! host_allowed "$host"; then
-    reason="URL host '${host:-<unparseable>}' is not on the approved allowlist (.github/hooks/allowed-domains.txt). Do not try to access this URL host."
+    reason="URL host '${host:-<unparseable>}' is not on the approved allowlist (.github/hooks/allowed-domains.txt). Do not try to access this URL host. **DO NOT** attempt to work around this restriction with other tools."
 
     # The objection is output to stdout as JSON.
     # The hook handler will parse this output and enforce the permission decision.
