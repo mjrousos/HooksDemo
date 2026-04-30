@@ -34,6 +34,14 @@ case "$TOOL_NAME" in
     [ -n "$URL" ] && URLS+=("$URL")
     ;;
 
+  # web_search queries may contain URLs. Scan the raw args string for any
+  # http(s) URLs and check each one against the allowlist.
+  web_search)
+    while IFS= read -r u; do
+      [ -n "$u" ] && URLS+=("$u")
+    done < <(printf '%s' "$TOOL_ARGS" | grep -oE 'https?://[^[:space:]"'\''<>`]+' || true)
+    ;;
+
   # Shell tools could indirectly make web requests, so we look for common
   # command line tools like curl or wget and try to extract URLs via regex.
   # A more conservative script could instead choose to deny all shell calls that

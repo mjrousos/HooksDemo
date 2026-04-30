@@ -32,6 +32,14 @@ switch -Regex ($toolName) {
         break
     }
 
+    # web_search queries may contain URLs. Scan the raw args string for any
+    # http(s) URLs and check each one against the allowlist.
+    '^web_search$' {
+        foreach ($m in [regex]::Matches($toolArgsRaw, 'https?://[^\s"''<>`]+')) {
+            $urls.Add($m.Value)
+        }
+        break
+    }
     # Shell tools could indirectly make web requests, so we look for common
     # command line tools like curl or wget and try to extract URLs via regex.
     # A more conservative script could instead choose to deny all shell calls that
