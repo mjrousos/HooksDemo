@@ -6,7 +6,6 @@
         "type": "command",
         "bash": "./scripts/url-allowlist.sh",
         "powershell": "./scripts/url-allowlist.ps1",
-        "cwd": ".",
         "timeoutSec": 10
       }
     ]
