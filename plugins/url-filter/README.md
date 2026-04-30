@@ -94,6 +94,14 @@ PowerShell:
   | pwsh -File .github/hooks/scripts/url-allowlist.ps1
 ```
 
+## Testing with Copilot agent
+
+You can test the hook in a live Copilot agent session by trying to fetch various URLs.
+
+For example, asking Copilot to summarize key points from https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating should succeed.
+
+On the other hand, asking it to summarize key points from https://devblogs.microsoft.com/dotnet/high-performance-distributed-caching-dotnet-postgres-azure/ should fail.
+
 ## Extending
 
 - **Logging.** Append the decision to a log file inside the script, e.g.
