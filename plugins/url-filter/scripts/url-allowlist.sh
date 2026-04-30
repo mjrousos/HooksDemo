@@ -10,6 +10,8 @@ ALLOWLIST="$SCRIPT_DIR/../allowed-domains.txt"
 
 INPUT=$(cat)
 
+# The input to the hook is expected to be a JSON object
+# as described at https://docs.github.com/en/copilot/reference/hooks-configuration
 if ! command -v jq >/dev/null 2>&1; then
   # Without jq we cannot safely parse the payload. Fail closed on any
   # tool call that *might* be a URL fetch by erring on the side of
@@ -18,6 +20,7 @@ if ! command -v jq >/dev/null 2>&1; then
   exit 0
 fi
 
+# Pre-tool use hooks receive a payload with at least "toolName" and "toolArgs" properties
 TOOL_NAME=$(printf '%s' "$INPUT" | jq -r '.toolName // ""')
 TOOL_ARGS=$(printf '%s' "$INPUT" | jq -r '.toolArgs // ""')
 
@@ -25,10 +28,16 @@ TOOL_ARGS=$(printf '%s' "$INPUT" | jq -r '.toolArgs // ""')
 URLS=()
 
 case "$TOOL_NAME" in
+  # Web fetching tools have a url parameter that we can check directly
   web_fetch|fetch|http_get|url_fetch)
     URL=$(printf '%s' "$TOOL_ARGS" | jq -r '.url // empty' 2>/dev/null || true)
     [ -n "$URL" ] && URLS+=("$URL")
     ;;
+
+  # Shell tools could indirectly make web requests, so we look for common
+  # command line tools like curl or wget and try to extract URLs via regex.
+  # A more conservative script could instead choose to deny all shell calls that
+  # include unallowed URLs.
   bash|shell|powershell)
     CMD=$(printf '%s' "$TOOL_ARGS" | jq -r '.command // empty' 2>/dev/null || true)
     if [ -n "$CMD" ] && printf '%s' "$CMD" | grep -qiE 'curl|wget|Invoke-WebRequest|Invoke-RestMethod|iwr|irm'; then
@@ -42,6 +51,7 @@ case "$TOOL_NAME" in
     ;;
 esac
 
+# Exiting with 0 without any other output allows the tool call.
 if [ "${#URLS[@]}" -eq 0 ]; then
   exit 0
 fi
@@ -75,10 +85,17 @@ host_allowed() {
   return 1
 }
 
+# Gets the host of each URL and checks if it's on the allowlist.
+# If any URL is not allowed, we output a JSON object with permissionDecision 'deny'
+# and a reason, then exit 0 to block the tool call.
+# If all URLs are allowed, we exit 0 with no output to allow the tool call.
 for url in "${URLS[@]}"; do
   host=$(extract_host "$url")
   if [ -z "$host" ] || ! host_allowed "$host"; then
     reason="URL host '${host:-<unparseable>}' is not on the approved allowlist (.github/hooks/allowed-domains.txt)."
+
+    # The objection is output to stdout as JSON.
+    # The hook handler will parse this output and enforce the permission decision.
     jq -cn --arg r "$reason" '{permissionDecision:"deny", permissionDecisionReason:$r}'
     exit 0
   fi
