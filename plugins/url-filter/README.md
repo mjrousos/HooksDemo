@@ -100,7 +100,7 @@ You can test the hook in a live Copilot agent session by trying to fetch various
 
 For example, asking Copilot to summarize key points from https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating should succeed.
 
-On the other hand, asking it to summarize key points from https://devblogs.microsoft.com/dotnet/high-performance-distributed-caching-dotnet-postgres-azure/ should fail.
+On the other hand, asking it to summarize key points from https://en.wikipedia.org/wiki/GitHub should fail.
 
 ## Extending
 
