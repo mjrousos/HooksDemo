@@ -49,10 +49,10 @@ The script:
    {"permissionDecision":"deny","permissionDecisionReason":"URL host 'example.com' is not on the approved allowlist (.github/hooks/allowed-domains.txt)."}
    ```
 
-   Per the [hooks reference][ref], only `deny` is currently honored, so
+   Per the [hooks reference][hooks-config], only `deny` is currently honored, so
    allowed calls simply exit 0 with no output.
 
-[ref]: https://docs.github.com/en/copilot/reference/hooks-configuration
+[hooks-config]: https://docs.github.com/en/copilot/reference/hooks-configuration
 
 ## Editing the allowlist
 
