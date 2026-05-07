@@ -1,0 +1,15 @@
+# Archives
+*.zip
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (in case plugins use npm)
+node_modules/
