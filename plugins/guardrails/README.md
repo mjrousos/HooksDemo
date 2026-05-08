@@ -107,6 +107,11 @@ The hook is registered with `"timeoutSec": 300` (5 minutes) so the user
 has time to read the command and decide. Increase this in `hooks.json`
 if you commonly need longer.
 
+### Demo Screenshots
+
+![rm-confirm Windows](assets/rm-confirm-windows.png)
+This dialog appears when a PowerShell command attempts to delete something.
+
 ## Installing
 
 From the repository root:
