@@ -7,6 +7,12 @@
         "bash": "./scripts/url-allowlist.sh",
         "powershell": "./scripts/url-allowlist.ps1",
         "timeoutSec": 10
+      },
+      {
+        "type": "command",
+        "bash": "./scripts/rm-confirm.sh",
+        "powershell": "./scripts/rm-confirm.ps1",
+        "timeoutSec": 300
       }
     ]
   }

@@ -12,7 +12,7 @@ installable plugin packaging one or more hook scripts together with a
 
 | Plugin | Description |
 | --- | --- |
-| [`plugins/url-filter`](./plugins/url-filter) | Adds a `preToolUse` hook that denies any tool call attempting to fetch a URL whose host is not on an editable allowlist. |
+| [`plugins/guardrails`](./plugins/guardrails) | Bundle of `preToolUse` hooks: a URL allowlist that denies tool calls fetching disallowed hosts, and an `rm`-confirmation hook that interactively prompts the user (TTY on Unix, MessageBox on Windows) before any `bash`/`shell`/`powershell` deletion command — even in YOLO mode. |
 
 More plugins demonstrating other hook triggers (e.g. `sessionStart`,
 `userPromptSubmitted`, `postToolUse`, `errorOccurred`) may be added over
@@ -23,7 +23,7 @@ time.
 From the repository root:
 
 ```sh
-copilot plugin install ./plugins/url-filter
+copilot plugin install ./plugins/guardrails
 copilot plugin list
 ```
 
@@ -34,7 +34,7 @@ install.
 To uninstall, use the `name` from the plugin's `plugin.json`:
 
 ```sh
-copilot plugin uninstall url-filter
+copilot plugin uninstall guardrails
 ```
 
 ## Repository layout
@@ -43,7 +43,7 @@ copilot plugin uninstall url-filter
 .
 ├── .github/hooks/        # Repository-scoped hooks (auto-loaded by Copilot in this repo)
 ├── plugins/              # Installable plugins (one subdirectory per plugin)
-│   └── url-filter/
+│   └── guardrails/
 └── README.md
 ```
 

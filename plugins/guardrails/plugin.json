@@ -1,0 +1,10 @@
+{
+  "name": "guardrails",
+  "description": "A bundle of preToolUse hooks that constrain Copilot agent behavior: a URL allowlist that blocks tool calls fetching disallowed hosts, and an rm-confirm hook that interactively prompts the user before any bash/shell/powershell deletion command (rm, rmdir, del, erase, ri, Remove-Item, Remove-ItemProperty) — even in YOLO mode.",
+  "version": "0.2.0",
+  "author": {
+    "name": "mjrousos"
+  },
+  "keywords": ["hooks", "security", "guardrails", "allowlist", "url", "rm", "confirmation"],
+  "hooks": "hooks.json"
+}
