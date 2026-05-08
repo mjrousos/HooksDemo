@@ -5,8 +5,6 @@
 
 $ErrorActionPreference = 'Stop'
 
-Write-Host "SCRIPT STARTING!"
-
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $allowlistPath = Join-Path $scriptDir '..\allowed-domains.txt'
 

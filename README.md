@@ -12,7 +12,7 @@ installable plugin packaging one or more hook scripts together with a
 
 | Plugin | Description |
 | --- | --- |
-| [`plugins/guardrails`](./plugins/guardrails) | Bundle of `preToolUse` hooks: a URL allowlist that denies tool calls fetching disallowed hosts, and an `rm`-confirmation hook that interactively prompts the user (TTY on Unix, MessageBox on Windows) before any `bash`/`shell`/`powershell` deletion command — even in YOLO mode. |
+| [`plugins/guardrails`](./plugins/guardrails) | Bundle of `preToolUse` hooks: a URL allowlist that denies tool calls fetching disallowed hosts, and an `rm`-confirmation hook that interactively prompts the user (TTY on Unix, MessageBox on Windows) before any `bash`/`shell`/`powershell` deletion command — even in YOLO mode. Includes a [regression test suite](./plugins/guardrails/tests) for both the bash and PowerShell hook scripts. |
 
 More plugins demonstrating other hook triggers (e.g. `sessionStart`,
 `userPromptSubmitted`, `postToolUse`, `errorOccurred`) may be added over
