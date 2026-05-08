@@ -110,7 +110,12 @@ if you commonly need longer.
 ### Demo Screenshots
 
 ![rm-confirm Windows](assets/rm-confirm-windows.png)
+
 This dialog appears when a PowerShell command attempts to delete something.
+
+![rm-Confirm Linux](assets/rm-confirm-linux.png)  
+
+This dialog appears when a bash command attempts to delete something. The user must answer `y` to allow the deletion.
 
 ## Installing
 
